@@ -9,9 +9,15 @@ module.exports = function(){
     .controller('ctrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout){
       $scope.searchList = []
       $scope.player = new Player();
-      $scope.monster = {}
+      $scope.monster = {"defence":0,"magic":0,"name":"Newtroost","image":"./assets/monster_images/Newtroost.png","version":"none","slayer":null,"hitpoints":18,"cb":19,"bonuses":{"crushDefence":0,"magicDefence":0,"rangedDefence":0,"slashDefence":0,"stabDefence":0}}
       $scope.monsterList = []
       $scope.tabSelected = 0
+      $scope.monsterSelected = 0
+
+      $scope.setMonster = function(monObj){
+        $scope.moster = monObj
+      }
+
       $scope.selectItem = function(itemName, search){
         var item
         search.dataObj.resList.forEach((i) => {
@@ -32,6 +38,7 @@ module.exports = function(){
           console.log(res)
           $scope.monsterList = res.data;
           $scope.monster = res.data[0]
+          $scope.monsterSelected = 0
         })
       }
 

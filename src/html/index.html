@@ -19,13 +19,13 @@
 					<div class='flex-container'>
 						<div class='flex-child'>
 							<div class='tabs'>
-								<span class='tab' ng-class="{'tab-selected':tabSelected==0}" ng-click="tabSelected = 0"><img class='item-icon' src="/assets/other_icons/worn_equipment.webp" />
+								<span class='tab' ng-class="{'tab-selected':tabSelected==0}" ng-click="tabSelected = 0"><img class='attacker-tab-icon' src="/assets/other_icons/worn_equipment.webp" />
 								</span>
-								<span class='tab' ng-class="{'tab-selected':tabSelected==1}" ng-click="tabSelected = 1"><img class='item-icon' src="/assets/other_icons/skills_icon.webp" />
+								<span class='tab' ng-class="{'tab-selected':tabSelected==1}" ng-click="tabSelected = 1"><img class='attacker-tab-icon' src="/assets/other_icons/skills_icon.webp" />
 								</span>
-								<span class='tab' ng-class="{'tab-selected':tabSelected==2}" ng-click="tabSelected = 2"><img class='item-icon' src="/assets/other_icons/prayer_icon.png" />
+								<span class='tab' ng-class="{'tab-selected':tabSelected==2}" ng-click="tabSelected = 2"><img class='attacker-tab-icon' src="/assets/other_icons/prayer_icon.png" />
 								</span>
-								<span class='tab' ng-class="{'tab-selected':tabSelected==3}" ng-click="tabSelected = 3"><img class='item-icon' src="/assets/other_icons/spellbook.png" /></span>
+								<span class='tab' ng-class="{'tab-selected':tabSelected==3}" ng-click="tabSelected = 3"><img class='attacker-tab-icon' src="/assets/other_icons/spellbook.png" /></span>
 							</div>
 							<div class='highlight-section'>
 								<div ng-if="tabSelected == 0" loadout player="player" search="itemSearch"></div>
@@ -101,7 +101,14 @@
 				<h2 class='flex-valign'><img src="/assets/other_icons/defence_icon.png"> <span class='space-left'>Defender</span></h2>
 				<div class='flex-container'>
 					<div class='flex-child highlight-section flex-container-vertical'>
-							<h2 class='center'>{{monster.name}}</h2>
+							<h3 class='center'>{{monster.name}}</h3>
+							<div ng-show="monsterList.length > 1">
+								<ul class='versions-holder'>
+									<li class='monsterVersion' ng-repeat="(index, monSelect) in monsterList" ng-class="{'monsterVersionSelected':index == $parent.monsterSelected}" ng-click="$parent.monster = monSelect; $parent.monsterSelected = index">
+										{{monSelect.version}}
+									</li>
+								</ul>
+							</div>
 							<div class='center'>
 								<img class="item-icon monster-image" ng-show="monster" ng-src="{{monster.image}}" />
 							</div>
@@ -114,13 +121,14 @@
 								<tr>
 									<td>
 										<div class='stat-wrap'>
-											<img src="https://oldschool.runescape.wiki/images/8/8f/Combat_icon.png?93d63" />140
+											<img src="https://oldschool.runescape.wiki/images/8/8f/Combat_icon.png?93d63" />
+											{{monster.cb}}
 										</div>
 									</td>
 									<td>
 										<div class='stat-wrap'>
 											<img src="https://oldschool.runescape.wiki/images/9/96/Hitpoints_icon.png?a4819" />
-											80
+											{{monster.hitpoints}} 
 										</div>
 									</td>
 								</tr>
@@ -128,13 +136,13 @@
 									<td>
 										<div class='stat-wrap'>
 											<img src="https://oldschool.runescape.wiki/images/b/b7/Defence_icon.png?ca0cd" />
-											50
+											{{monster.defence}}
 										</div>
 									</td>
 									<td>
 										<div class='stat-wrap'>
 											<img src="https://oldschool.runescape.wiki/images/5/5c/Magic_icon.png?334cf" />
-											1
+											{{monster.magic}}
 										</div>
 									</td>
 								</tr>
@@ -143,11 +151,11 @@
 						<div>
 							<h3>Defence bonus</h3>
 							<table class='bonus-table'>
-								<tr bonus-row bonus-name='Stab' value="{{monster.bonuses[5]}}"></tr>
-								<tr bonus-row bonus-name='Slash' value="{{monster.bonuses[6]}}"></tr>
-								<tr bonus-row bonus-name='Crush' value="{{monster.bonuses[7]}}"></tr>
-								<tr bonus-row bonus-name='Magic' value="{{monster.bonuses[8]}}"></tr>
-								<tr bonus-row bonus-name='Range' value="{{monster.bonuses[9]}}"></tr>
+								<tr bonus-row bonus-name='Stab' value="{{monster.bonuses.stabDefence}}"></tr>
+								<tr bonus-row bonus-name='Slash' value="{{monster.bonuses.slashDefence}}"></tr>
+								<tr bonus-row bonus-name='Crush' value="{{monster.bonuses.crushDefence}}"></tr>
+								<tr bonus-row bonus-name='Magic' value="{{monster.bonuses.magicDefence}}"></tr>
+								<tr bonus-row bonus-name='Range' value="{{monster.bonuses.rangedDefence}}"></tr>
 							</table>
 						</div>
 					</div>
