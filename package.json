@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "angular": "^1.7.9",
+    "browserslist": "^4.8.6",
     "express": "^4.17.1",
     "html-entities": "^1.2.1",
     "jshint": "^2.11.0",

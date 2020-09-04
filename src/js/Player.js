@@ -17,12 +17,31 @@ const nullItem = {
   bonuses: Array(14).fill(0)
 };
 
+const unarmed = {
+  id: 0,
+  name: "Unarmed",
+  slot: "weapon",
+  bonuses: Array(14).fill(0),
+  category: {
+    name:"unarmed",
+    speed:4,
+    styles:
+      [
+        {combatStyle:"Punch", type:"Crush", attackStyle:"Accurate"},
+        {combatStyle:"Kick", type:"Crush", attackStyle:"Aggressive"},
+        {combatStyle:"Block", type:"Crush", attackStyle:"Defensive"}
+      ]
+  }
+}
+
 class Player{
   constructor(){
+    this.attackStyle = 0
   	this.equipment = {};
     this.slots.forEach((slot) => {
       this.equipment[slot] = nullItem;
-    });
+      this.equipment['weapon'] = unarmed
+    }); 
 
     this.bonuses = Array(14).fill(0);
     this.stats = {
@@ -47,13 +66,18 @@ class Player{
     if(slots.indexOf(item.slot) === -1){
       return false;
     }
+
+    if(item.slot == "weapon" || item.slot == "2h"){
+      this.attackStyle = 0 //reset attack style selection on weapon switch
+    }
+
     if(item.slot === "2h"){
       this.equipment.weapon = item;
       this.unequip("shield");
     }
     else if(item.slot ==="shield" && this.equipment.weapon.slot === "2h"){
       this.equipment[item.slot] = item;
-      this.unequip("weapon");
+      this.equip(unarmed)
     }
     else{
       this.equipment[item.slot] = item;
@@ -67,6 +91,7 @@ class Player{
   };
 
   update(){
+    console.log(this)
     var player = this;
     for (var i = 0; i < bonusList.length; i++) {
       var bonus = 0;
@@ -77,11 +102,19 @@ class Player{
     }
   }
 
+  get attackType(){
+    return this.equipment.weapon.category.styles[this.attackStyle]
+  }
+
   get slots(){
   	return slots
   }
   get bonusList(){
   	return bonusList
+  }
+
+  bonus(bonusName){
+    return this.bonuses[bonusList.indexOf(bonusName)]
   }
 }
 

@@ -21,4 +21,10 @@
                   <div class='loadout-cell' loadout-cell slotname="ring" player="player"></div>
                 </div>
                 <div search-box id="item-search" placeholder="Equip an item..." class="loadout-row" search="search"></div>
+                <form class="combat-styles-holder">
+                    <span ng-repeat="(index,style) in player.equipment.weapon.category.styles">
+                      <input class="combat-style-radio" style="display:none" type="radio" name="attackStyle" ng-value="index" id="{{'style'+index}}" ng-model="player.attackStyle"/> 
+                      <label for="{{'style'+index}}" class='combat-style' ng-class="{'combat-style-selected':index == player.attackStyle}">{{style.combatStyle}}</label>
+                    </span>
+                  </form>
               </div>

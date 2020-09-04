@@ -9,6 +9,8 @@ $color2:#ff8274;
 $color3:#9eff74;
 $radius:0.125em;
 
+
+
 @mixin placeholder {
   ::-webkit-input-placeholder {@content}
   :-moz-placeholder           {@content}
@@ -40,6 +42,7 @@ html{
 body{
 	background-color:#222;
 	color:#ddd;
+	text-shadow: 0 0.125em 0.125em rgba(0,0,0,0.5);
 }
 
 .color-1{
@@ -66,9 +69,13 @@ body{
 	border-top:0.5em solid $color3;
 }
 
+.top-border-blue{
+	border-top:0.5em solid $color1;
+}
+
 
 .width-control{
-	max-width:1080px;
+	max-width:1400px;
 	margin:0 auto;
 	font-family: $font1;
 }
@@ -85,7 +92,7 @@ body{
 .auto-complete-input{
 	width:100%;
 	border:none;
-	padding:0.25em;
+	padding:1em;
 	background-color:#444;
 	border-radius:$radius;
 	color:#ccc;
@@ -135,20 +142,27 @@ body{
 .flex-container{
 	display:flex;
 	justify-content:space-between;
-	align-items:flex-start;
+	align-items:stretch;
 }
 
 .main-section{
-	background-color:white;
+	/*background-color:white;*/
+	padding:$spacing-full;
+	/*box-shadow:$box-shadow;*/
+	/*background-color:#444;*/
+
+	h2{
+		font-size:2em;
+	}
+}
+
+.body-color-container{
+		/*background-color:white;*/
 	padding:$spacing-full;
 	box-shadow:$box-shadow;
 	background-color:#444;
 	border-bottom-left-radius: $radius;
 	border-bottom-right-radius: $radius;
-	border-top-right-radius:0.25em;
-	h2{
-		font-size:1.5em;
-	}
 }
 
 .space-left{
@@ -280,6 +294,10 @@ body{
 
 .bonus-table{
 	width:100%;
+	border:1px solid #555;
+	td{
+		padding:0.5em;
+	}
 	td:nth-child(1){
 		font-family: $font1;
 		/*padding-left:1em;*/
@@ -348,9 +366,11 @@ body{
 
 #page-header{
   padding: 0.5em;
-  color: #aaa;
-  font-size: 2em;
+  font-size: 3em;
   font-family:$font2;
+  background-color:#333;
+  border-bottom: 10px solid $color3;
+  color:white;
 }
 
 
@@ -378,4 +398,20 @@ body{
 
 .monsterVersionSelected{
 	background-color:#444;
+}
+
+.combat-style{
+	font-size:0.8em;
+	padding:0.25em;
+	margin-right:0.5em;
+	cursor:pointer;
+	&:hover, &.combat-style-selected{
+		background-color:#666;
+	}
+}
+
+
+.combat-styles-holder{
+	display:flex;
+	margin-top:0.5em;
 }
